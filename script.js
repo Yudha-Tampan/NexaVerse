@@ -13,12 +13,12 @@ const API = {
   jadwalbola:  `${BASE}/info/jadwalbola?apikey=${APIKEY}`,
   jadwaltv:    (ch) => `${BASE}/info/jadwaltv?channel=${encodeURIComponent(ch)}&apikey=${APIKEY}`,
   cosplay:     `${BASE}/random/cosplay?apikey=${APIKEY}`,
-  loli:        `${BASE}/random/loli?apikey=${APIKEY}`,
-  neko:        `${BASE}/random/neko?apikey=${APIKEY}`,
+  loli:        `${BASE}/image/loli?apikey=${APIKEY}`,
+  neko:        `${BASE}/nsfw/hentai?apikey=${APIKEY}`,
   ssweb:       (url, dev) => `${BASE}/tools/ssweb?url=${encodeURIComponent(url)}&device=${dev}&apikey=${APIKEY}`,
   tempcreate:  `${BASE}/tools/tempmail/create?apikey=${APIKEY}`,
   tempcheck:   (mb, salt, cookies) => `${BASE}/tools/tempmail/check?mailbox=${encodeURIComponent(mb)}&salt=${encodeURIComponent(salt)}&cookies=${encodeURIComponent(cookies)}&apikey=${APIKEY}`,
-  hd:          `${BASE}/tools/hd`,
+  hd:          `${BASE}/tools/hd?apikey=${APIKEY}`,
 };
 
 // ── State ──────────────────────────────────────────────────────
