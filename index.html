@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AnimeVault — Papayang & Blue Archive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>AnimeVault</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet" />
@@ -11,11 +11,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- Background particles -->
   <div class="bg-particles" id="bgParticles"></div>
-
-  <!-- Toast container -->
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- Header -->
@@ -32,14 +28,13 @@
   <!-- Main content -->
   <main class="main-content">
 
-    <!-- ===== PAPAYANG SECTION ===== -->
+    <!-- PAPAYANG -->
     <section class="page-section active" id="section-papayang">
       <div class="section-hero">
         <div class="section-label">Random Gallery</div>
         <h1 class="section-title">Papayang <span class="accent">Images</span></h1>
         <p class="section-desc">Klik tombol di bawah untuk memuat gambar random dari koleksi Papayang.</p>
       </div>
-
       <div class="card-wrapper">
         <div class="image-card" id="papayangCard">
           <div class="card-glow"></div>
@@ -50,96 +45,65 @@
             </div>
             <img id="papayangImg" src="" alt="Papayang Image" style="display:none" />
             <div class="image-overlay" id="papayangOverlay" style="display:none">
-              <div class="overlay-tags">
-                <span class="tag"><i class="ri-image-fill"></i> Papayang</span>
-              </div>
+              <div class="overlay-tags"><span class="tag"><i class="ri-image-fill"></i> Papayang</span></div>
             </div>
           </div>
-          <div class="card-loading" id="papayangLoading">
-            <div class="spinner"></div>
-            <span>Memuat gambar…</span>
-          </div>
+          <div class="card-loading" id="papayangLoading"><div class="spinner"></div><span>Memuat…</span></div>
         </div>
-
         <div class="action-bar">
-          <button class="btn btn-primary" id="btnPapayangLoad" onclick="loadPapayang()">
-            <i class="ri-refresh-line"></i> Load Image
-          </button>
-          <button class="btn btn-glass" id="btnPapayangDownload" onclick="downloadImage('papayangImg', 'papayang')" disabled>
-            <i class="ri-download-2-line"></i> Download
-          </button>
+          <button class="btn btn-primary" onclick="loadPapayang()"><i class="ri-refresh-line"></i> Load Image</button>
+          <button class="btn btn-glass" id="btnPapayangDownload" onclick="downloadImage('papayangImg','papayang')" disabled><i class="ri-download-2-line"></i> Download</button>
         </div>
       </div>
     </section>
 
-    <!-- ===== IQC SECTION ===== -->
+    <!-- IQC -->
     <section class="page-section" id="section-iqc">
       <div class="section-hero">
         <div class="section-label">Canvas Generator</div>
         <h1 class="section-title">IQC <span class="accent">Generator</span></h1>
         <p class="section-desc">Masukkan teks bebas, lalu generate canvas IQC custom secara instan.</p>
       </div>
-
       <div class="card-wrapper">
         <div class="iqc-input-group">
           <div class="input-wrapper">
             <i class="ri-text-snippet ri-input-icon"></i>
-            <input
-              type="text"
-              id="iqcText"
-              class="iqc-input"
-              placeholder="Ketik teks di sini…"
-              maxlength="80"
-            />
+            <input type="text" id="iqcText" class="iqc-input" placeholder="Ketik teks di sini…" maxlength="80" />
             <span class="char-count" id="charCount">0/80</span>
           </div>
-          <button class="btn btn-primary btn-generate" id="btnIqcGenerate" onclick="generateIQC()">
-            <i class="ri-magic-line"></i> Generate
-          </button>
+          <button class="btn btn-primary btn-generate" onclick="generateIQC()"><i class="ri-magic-line"></i> Generate</button>
         </div>
-
-        <div class="card-wrapper no-margin">
-          <div class="image-card" id="iqcCard">
-            <div class="card-glow glow-purple"></div>
-            <div class="card-inner">
-              <div class="image-placeholder" id="iqcPlaceholder">
-                <div class="placeholder-icon"><i class="ri-palette-line"></i></div>
-                <p>Masukkan teks lalu tekan <strong>Generate</strong></p>
-              </div>
-              <img id="iqcImg" src="" alt="IQC Canvas" style="display:none" />
-              <div class="image-overlay" id="iqcOverlay" style="display:none">
-                <div class="overlay-tags">
-                  <span class="tag"><i class="ri-palette-fill"></i> IQC Canvas</span>
-                  <span class="tag tag-text" id="iqcTagText"></span>
-                </div>
+        <div class="image-card" id="iqcCard">
+          <div class="card-glow glow-purple"></div>
+          <div class="card-inner">
+            <div class="image-placeholder" id="iqcPlaceholder">
+              <div class="placeholder-icon"><i class="ri-palette-line"></i></div>
+              <p>Masukkan teks lalu tekan <strong>Generate</strong></p>
+            </div>
+            <img id="iqcImg" src="" alt="IQC Canvas" style="display:none" />
+            <div class="image-overlay" id="iqcOverlay" style="display:none">
+              <div class="overlay-tags">
+                <span class="tag"><i class="ri-palette-fill"></i> IQC Canvas</span>
+                <span class="tag tag-text" id="iqcTagText"></span>
               </div>
             </div>
-            <div class="card-loading" id="iqcLoading">
-              <div class="spinner spinner-purple"></div>
-              <span>Generating canvas…</span>
-            </div>
           </div>
-
-          <div class="action-bar">
-            <button class="btn btn-glass" id="btnIqcDownload" onclick="downloadImage('iqcImg', 'iqc-canvas')" disabled>
-              <i class="ri-download-2-line"></i> Download
-            </button>
-            <div class="api-url-badge" id="iqcApiUrl">
-              <i class="ri-links-line"></i> <span>Masukkan teks untuk melihat URL</span>
-            </div>
-          </div>
+          <div class="card-loading" id="iqcLoading"><div class="spinner spinner-purple"></div><span>Generating…</span></div>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-glass" id="btnIqcDownload" onclick="downloadImage('iqcImg','iqc-canvas')" disabled><i class="ri-download-2-line"></i> Download</button>
+          <div class="api-url-badge" id="iqcApiUrl"><i class="ri-links-line"></i><span>Masukkan teks untuk melihat URL</span></div>
         </div>
       </div>
     </section>
 
-    <!-- ===== BLUE ARCHIVE SECTION ===== -->
+    <!-- BLUE ARCHIVE -->
     <section class="page-section" id="section-bluearchive">
       <div class="section-hero">
         <div class="section-label">Random Gallery</div>
         <h1 class="section-title">Blue <span class="accent">Archive</span></h1>
         <p class="section-desc">Gambar random dari dunia Blue Archive, langsung dari API.</p>
       </div>
-
       <div class="card-wrapper">
         <div class="image-card" id="baCard">
           <div class="card-glow glow-cyan"></div>
@@ -150,24 +114,250 @@
             </div>
             <img id="baImg" src="" alt="Blue Archive Image" style="display:none" />
             <div class="image-overlay" id="baOverlay" style="display:none">
-              <div class="overlay-tags">
-                <span class="tag tag-cyan"><i class="ri-star-fill"></i> Blue Archive</span>
-              </div>
+              <div class="overlay-tags"><span class="tag tag-cyan"><i class="ri-star-fill"></i> Blue Archive</span></div>
             </div>
           </div>
-          <div class="card-loading" id="baLoading">
-            <div class="spinner spinner-cyan"></div>
-            <span>Memuat gambar…</span>
+          <div class="card-loading" id="baLoading"><div class="spinner spinner-cyan"></div><span>Memuat…</span></div>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-primary btn-cyan" onclick="loadBlueArchive()"><i class="ri-refresh-line"></i> Load Image</button>
+          <button class="btn btn-glass" id="btnBaDownload" onclick="downloadImage('baImg','blue-archive')" disabled><i class="ri-download-2-line"></i> Download</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- JADWAL BOLA -->
+    <section class="page-section" id="section-jadwalbola">
+      <div class="section-hero">
+        <div class="section-label">Info Olahraga</div>
+        <h1 class="section-title">Jadwal <span class="accent">Bola</span></h1>
+        <p class="section-desc">Lihat jadwal pertandingan sepak bola terkini.</p>
+      </div>
+      <div class="card-wrapper">
+        <button class="btn btn-primary" onclick="loadJadwalBola()"><i class="ri-football-line"></i> Muat Jadwal</button>
+        <div class="data-card" id="jadwalBolaResult">
+          <div class="data-placeholder"><div class="placeholder-icon"><i class="ri-football-line"></i></div><p>Tekan tombol untuk melihat jadwal</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JADWAL TV -->
+    <section class="page-section" id="section-jadwaltv">
+      <div class="section-hero">
+        <div class="section-label">Info Hiburan</div>
+        <h1 class="section-title">Jadwal <span class="accent">TV</span></h1>
+        <p class="section-desc">Cek jadwal acara TV favorit kamu.</p>
+      </div>
+      <div class="card-wrapper">
+        <div class="select-wrapper">
+          <i class="ri-tv-line select-icon"></i>
+          <select id="tvChannel" class="custom-select">
+            <option value="Indosiar">Indosiar</option>
+            <option value="RCTI">RCTI</option>
+            <option value="SCTV">SCTV</option>
+            <option value="Trans TV">Trans TV</option>
+            <option value="Trans7">Trans7</option>
+            <option value="Metro TV">Metro TV</option>
+            <option value="tvOne">tvOne</option>
+            <option value="GTV">GTV</option>
+            <option value="MNC TV">MNC TV</option>
+            <option value="NET">NET</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="loadJadwalTV()"><i class="ri-tv-2-line"></i> Lihat Jadwal</button>
+        <div class="data-card" id="jadwalTVResult">
+          <div class="data-placeholder"><div class="placeholder-icon"><i class="ri-tv-line"></i></div><p>Pilih channel dan tekan tombol</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COSPLAY -->
+    <section class="page-section" id="section-cosplay">
+      <div class="section-hero">
+        <div class="section-label">Random Gallery</div>
+        <h1 class="section-title">Random <span class="accent">Cosplay</span></h1>
+        <p class="section-desc">Gambar cosplay random dari koleksi API.</p>
+      </div>
+      <div class="card-wrapper">
+        <div class="image-card" id="cosplayCard">
+          <div class="card-glow glow-pink"></div>
+          <div class="card-inner">
+            <div class="image-placeholder" id="cosplayPlaceholder">
+              <div class="placeholder-icon"><i class="ri-user-star-line"></i></div>
+              <p>Tekan <strong>Load</strong> untuk memulai</p>
+            </div>
+            <img id="cosplayImg" src="" alt="Cosplay" style="display:none" />
+            <div class="image-overlay" id="cosplayOverlay" style="display:none">
+              <div class="overlay-tags"><span class="tag tag-pink"><i class="ri-user-star-fill"></i> Cosplay</span></div>
+            </div>
+          </div>
+          <div class="card-loading" id="cosplayLoading"><div class="spinner spinner-pink"></div><span>Memuat…</span></div>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-primary btn-pink" onclick="loadCosplay()"><i class="ri-refresh-line"></i> Load Image</button>
+          <button class="btn btn-glass" id="btnCosplayDownload" onclick="downloadImage('cosplayImg','cosplay')" disabled><i class="ri-download-2-line"></i> Download</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOLI -->
+    <section class="page-section" id="section-loli">
+      <div class="section-hero">
+        <div class="section-label">Random Gallery</div>
+        <h1 class="section-title">Random <span class="accent">Loli</span></h1>
+        <p class="section-desc">Gambar anime loli random dari koleksi API.</p>
+      </div>
+      <div class="card-wrapper">
+        <div class="image-card" id="loliCard">
+          <div class="card-glow glow-yellow"></div>
+          <div class="card-inner">
+            <div class="image-placeholder" id="loliPlaceholder">
+              <div class="placeholder-icon"><i class="ri-emotion-happy-line"></i></div>
+              <p>Tekan <strong>Load</strong> untuk memulai</p>
+            </div>
+            <img id="loliImg" src="" alt="Loli" style="display:none" />
+            <div class="image-overlay" id="loliOverlay" style="display:none">
+              <div class="overlay-tags"><span class="tag tag-yellow"><i class="ri-emotion-happy-fill"></i> Loli</span></div>
+            </div>
+          </div>
+          <div class="card-loading" id="loliLoading"><div class="spinner spinner-yellow"></div><span>Memuat…</span></div>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-primary btn-yellow" onclick="loadLoli()"><i class="ri-refresh-line"></i> Load Image</button>
+          <button class="btn btn-glass" id="btnLoliDownload" onclick="downloadImage('loliImg','loli')" disabled><i class="ri-download-2-line"></i> Download</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEKO -->
+    <section class="page-section" id="section-neko">
+      <div class="section-hero">
+        <div class="section-label">Random Gallery</div>
+        <h1 class="section-title">Random <span class="accent">Neko</span></h1>
+        <p class="section-desc">Gambar neko/kucing anime random dari koleksi API.</p>
+      </div>
+      <div class="card-wrapper">
+        <div class="image-card" id="nekoCard">
+          <div class="card-glow glow-green"></div>
+          <div class="card-inner">
+            <div class="image-placeholder" id="nekoPlaceholder">
+              <div class="placeholder-icon"><i class="ri-bear-smile-line"></i></div>
+              <p>Tekan <strong>Load</strong> untuk memulai</p>
+            </div>
+            <img id="nekoImg" src="" alt="Neko" style="display:none" />
+            <div class="image-overlay" id="nekoOverlay" style="display:none">
+              <div class="overlay-tags"><span class="tag tag-green"><i class="ri-bear-smile-fill"></i> Neko</span></div>
+            </div>
+          </div>
+          <div class="card-loading" id="nekoLoading"><div class="spinner spinner-green"></div><span>Memuat…</span></div>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-primary btn-green" onclick="loadNeko()"><i class="ri-refresh-line"></i> Load Image</button>
+          <button class="btn btn-glass" id="btnNekoDownload" onclick="downloadImage('nekoImg','neko')" disabled><i class="ri-download-2-line"></i> Download</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENSHOT WEB -->
+    <section class="page-section" id="section-ssweb">
+      <div class="section-hero">
+        <div class="section-label">Tools</div>
+        <h1 class="section-title">SS <span class="accent">Website</span></h1>
+        <p class="section-desc">Screenshot website apapun dalam berbagai mode perangkat.</p>
+      </div>
+      <div class="card-wrapper">
+        <div class="input-wrapper">
+          <i class="ri-global-line ri-input-icon"></i>
+          <input type="url" id="sswebUrl" class="iqc-input" placeholder="https://google.com" />
+        </div>
+        <div class="select-wrapper">
+          <i class="ri-device-line select-icon"></i>
+          <select id="sswebDevice" class="custom-select">
+            <option value="desktop">Desktop</option>
+            <option value="mobile">Mobile</option>
+            <option value="tablet">Tablet</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="loadSSWeb()"><i class="ri-screenshot-line"></i> Screenshot</button>
+        <div class="image-card" id="sswebCard">
+          <div class="card-glow"></div>
+          <div class="card-inner">
+            <div class="image-placeholder" id="sswebPlaceholder">
+              <div class="placeholder-icon"><i class="ri-screenshot-line"></i></div>
+              <p>Masukkan URL lalu tekan <strong>Screenshot</strong></p>
+            </div>
+            <img id="sswebImg" src="" alt="Screenshot" style="display:none" />
+            <div class="image-overlay" id="sswebOverlay" style="display:none">
+              <div class="overlay-tags"><span class="tag"><i class="ri-screenshot-fill"></i> Screenshot</span></div>
+            </div>
+          </div>
+          <div class="card-loading" id="sswebLoading"><div class="spinner"></div><span>Mengambil screenshot…</span></div>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-glass" id="btnSswebDownload" onclick="downloadImage('sswebImg','screenshot')" disabled><i class="ri-download-2-line"></i> Download</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEMP MAIL -->
+    <section class="page-section" id="section-tempmail">
+      <div class="section-hero">
+        <div class="section-label">Tools</div>
+        <h1 class="section-title">Temp <span class="accent">Mail</span></h1>
+        <p class="section-desc">Buat email sementara dan cek inbox langsung dari sini.</p>
+      </div>
+      <div class="card-wrapper">
+        <button class="btn btn-primary" onclick="createTempMail()"><i class="ri-mail-add-line"></i> Buat Email Baru</button>
+        <div class="data-card" id="tempmailInfo" style="display:none">
+          <div class="mail-info-row">
+            <span class="mail-label"><i class="ri-mail-line"></i> Email</span>
+            <span class="mail-value" id="tempmailAddress">-</span>
+            <button class="btn-copy" onclick="copyText('tempmailAddress')" title="Salin"><i class="ri-file-copy-line"></i></button>
+          </div>
+          <div class="mail-info-row">
+            <span class="mail-label"><i class="ri-key-line"></i> Salt</span>
+            <span class="mail-value small" id="tempmailSalt">-</span>
           </div>
         </div>
+        <div id="tempmailCheckArea" style="display:none">
+          <button class="btn btn-glass" onclick="checkTempMail()"><i class="ri-inbox-line"></i> Cek Inbox</button>
+        </div>
+        <div class="data-card" id="tempmailInbox">
+          <div class="data-placeholder"><div class="placeholder-icon"><i class="ri-inbox-line"></i></div><p>Buat email terlebih dahulu</p></div>
+        </div>
+      </div>
+    </section>
 
-        <div class="action-bar">
-          <button class="btn btn-primary btn-cyan" id="btnBaLoad" onclick="loadBlueArchive()">
-            <i class="ri-refresh-line"></i> Load Image
-          </button>
-          <button class="btn btn-glass" id="btnBaDownload" onclick="downloadImage('baImg', 'blue-archive')" disabled>
-            <i class="ri-download-2-line"></i> Download
-          </button>
+    <!-- HD UPSCALE -->
+    <section class="page-section" id="section-hd">
+      <div class="section-hero">
+        <div class="section-label">Tools</div>
+        <h1 class="section-title">HD <span class="accent">Upscaler</span></h1>
+        <p class="section-desc">Upload gambar untuk di-enhance kualitasnya ke HD.</p>
+      </div>
+      <div class="card-wrapper">
+        <div class="upload-area" id="hdUploadArea" onclick="document.getElementById('hdFileInput').click()">
+          <div class="upload-icon"><i class="ri-upload-cloud-2-line"></i></div>
+          <p class="upload-text">Klik untuk pilih gambar</p>
+          <p class="upload-hint">JPG, PNG, WebP — maks 10 MB</p>
+          <input type="file" id="hdFileInput" accept="image/*" style="display:none" onchange="handleHdUpload(event)" />
+        </div>
+        <div id="hdPreviewArea" style="display:none">
+          <div class="image-card" id="hdCard">
+            <div class="card-glow glow-orange"></div>
+            <div class="card-inner">
+              <img id="hdResultImg" src="" alt="HD Result" style="display:none; width:100%; height:100%; object-fit:contain;" />
+              <div class="image-placeholder" id="hdResultPlaceholder">
+                <div class="placeholder-icon"><i class="ri-image-edit-line"></i></div>
+                <p>Tekan <strong>Upscale</strong> untuk proses</p>
+              </div>
+            </div>
+            <div class="card-loading" id="hdLoading"><div class="spinner spinner-orange"></div><span>Upscaling…</span></div>
+          </div>
+          <div class="action-bar">
+            <button class="btn btn-primary btn-orange" onclick="processHD()"><i class="ri-hd-line"></i> Upscale HD</button>
+            <button class="btn btn-glass" id="btnHdDownload" onclick="downloadImage('hdResultImg','hd-upscaled')" disabled><i class="ri-download-2-line"></i> Download</button>
+          </div>
         </div>
       </div>
     </section>
@@ -176,21 +366,39 @@
 
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
-    <div class="nav-inner">
+    <div class="nav-scroll">
       <button class="nav-item active" data-section="papayang" onclick="switchSection('papayang')">
-        <div class="nav-icon"><i class="ri-image-line"></i></div>
-        <span>Papayang</span>
-        <div class="nav-indicator"></div>
+        <div class="nav-icon"><i class="ri-image-line"></i></div><span>Papayang</span><div class="nav-indicator"></div>
       </button>
       <button class="nav-item" data-section="iqc" onclick="switchSection('iqc')">
-        <div class="nav-icon"><i class="ri-magic-fill"></i></div>
-        <span>IQC</span>
-        <div class="nav-indicator"></div>
+        <div class="nav-icon"><i class="ri-magic-fill"></i></div><span>IQC</span><div class="nav-indicator"></div>
       </button>
       <button class="nav-item" data-section="bluearchive" onclick="switchSection('bluearchive')">
-        <div class="nav-icon"><i class="ri-star-smile-fill"></i></div>
-        <span>Blue Archive</span>
-        <div class="nav-indicator"></div>
+        <div class="nav-icon"><i class="ri-star-smile-fill"></i></div><span>Blue Arc</span><div class="nav-indicator"></div>
+      </button>
+      <button class="nav-item" data-section="jadwalbola" onclick="switchSection('jadwalbola')">
+        <div class="nav-icon"><i class="ri-football-line"></i></div><span>Bola</span><div class="nav-indicator"></div>
+      </button>
+      <button class="nav-item" data-section="jadwaltv" onclick="switchSection('jadwaltv')">
+        <div class="nav-icon"><i class="ri-tv-line"></i></div><span>TV</span><div class="nav-indicator"></div>
+      </button>
+      <button class="nav-item" data-section="cosplay" onclick="switchSection('cosplay')">
+        <div class="nav-icon"><i class="ri-user-star-line"></i></div><span>Cosplay</span><div class="nav-indicator"></div>
+      </button>
+      <button class="nav-item" data-section="loli" onclick="switchSection('loli')">
+        <div class="nav-icon"><i class="ri-emotion-happy-line"></i></div><span>Loli</span><div class="nav-indicator"></div>
+      </button>
+      <button class="nav-item" data-section="neko" onclick="switchSection('neko')">
+        <div class="nav-icon"><i class="ri-bear-smile-line"></i></div><span>Neko</span><div class="nav-indicator"></div>
+      </button>
+      <button class="nav-item" data-section="ssweb" onclick="switchSection('ssweb')">
+        <div class="nav-icon"><i class="ri-screenshot-line"></i></div><span>SS Web</span><div class="nav-indicator"></div>
+      </button>
+      <button class="nav-item" data-section="tempmail" onclick="switchSection('tempmail')">
+        <div class="nav-icon"><i class="ri-mail-line"></i></div><span>TempMail</span><div class="nav-indicator"></div>
+      </button>
+      <button class="nav-item" data-section="hd" onclick="switchSection('hd')">
+        <div class="nav-icon"><i class="ri-hd-line"></i></div><span>HD</span><div class="nav-indicator"></div>
       </button>
     </div>
   </nav>
