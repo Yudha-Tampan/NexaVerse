@@ -6,7 +6,7 @@
 'use strict';
 
 /* ============ CONSTANTS ============ */
-const API_KEY = 'XXYxB';
+const API_KEY = 'mykey111';
 const BASE_URL = 'https://api.theresav.biz.id';
 const FALLBACK_IMG = 'https://placehold.co/400x225/0f0f1a/00f5ff?text=NexaVerse';
 const FALLBACK_HERO_IMG = 'https://placehold.co/200x200/0f0f1a/bf00ff?text=MLBB';
