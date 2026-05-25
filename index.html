@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexaVerse</title>
+  <meta name="description" content="NexaVerse - Berita, Gambar, dan Game dalam satu aplikasi modern" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { poppins: ['Poppins','sans-serif'], orbitron: ['Orbitron','sans-serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-poppins bg-dark-900 text-white overflow-x-hidden">
+
+  <!-- Splash Screen -->
+  <div id="splash-screen" class="splash-screen">
+    <div class="splash-content">
+      <div class="splash-logo">
+        <span class="splash-logo-text">NEXA</span><span class="splash-logo-accent">VERSE</span>
+      </div>
+      <div class="splash-tagline">Your Universe of Information</div>
+      <div class="splash-loader"><div class="splash-bar"></div></div>
+    </div>
+    <div class="splash-particles" id="splash-particles"></div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scroll to Top -->
+  <button id="scroll-top" class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Main App -->
+  <div id="app" class="app-container" style="opacity:0">
+
+    <!-- Header -->
+    <header class="app-header glass-heavy">
+      <div class="header-inner">
+        <div class="header-logo">
+          <span class="logo-text">NEXA</span><span class="logo-accent">VERSE</span>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" id="refresh-btn" title="Refresh">
+            <i class="fas fa-rotate-right"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Pages -->
+    <main class="main-content" id="main-content">
+
+      <!-- ========== PAGE: BERITA ========== -->
+      <section id="page-berita" class="page active-page">
+
+        <!-- Widgets -->
+        <div class="info-widgets">
+          <!-- Gempa Widget -->
+          <div class="widget-card glass" id="gempa-widget">
+            <div class="widget-header">
+              <div class="widget-icon earthquake-icon"><i class="fas fa-wave-square"></i></div>
+              <div>
+                <div class="widget-title">Info Gempa Terkini</div>
+                <div class="widget-sub" id="gempa-time">Memuat...</div>
+              </div>
+              <button class="refresh-small" onclick="loadGempa()"><i class="fas fa-sync-alt"></i></button>
+            </div>
+            <div id="gempa-content" class="gempa-content">
+              <div class="skeleton-line w-3/4"></div>
+              <div class="skeleton-line w-1/2"></div>
+              <div class="skeleton-line w-2/3"></div>
+            </div>
+          </div>
+
+          <!-- Cuaca Widget -->
+          <div class="widget-card glass" id="cuaca-widget">
+            <div class="widget-header">
+              <div class="widget-icon weather-icon"><i class="fas fa-cloud-sun"></i></div>
+              <div class="flex-1">
+                <div class="widget-title">Info Cuaca</div>
+              </div>
+            </div>
+            <div class="weather-search">
+              <input type="text" id="weather-input" placeholder="Cari kota... (e.g. Jakarta)" class="weather-input" />
+              <button class="weather-search-btn" onclick="loadWeather()"><i class="fas fa-search"></i></button>
+            </div>
+            <div id="weather-content" class="weather-content">
+              <div class="weather-empty"><i class="fas fa-map-marker-alt"></i><span>Masukkan nama kota</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- News Section -->
+        <div class="section-header">
+          <h2 class="section-title"><i class="fas fa-newspaper"></i> Berita Terkini</h2>
+          <div class="search-bar-wrap">
+            <input type="text" id="news-search" placeholder="Cari berita..." class="search-input" />
+            <i class="fas fa-search search-icon"></i>
+          </div>
+        </div>
+
+        <div class="tab-bar" id="news-tabs">
+          <button class="tab-btn active" data-source="sindonews">Sindonews</button>
+          <button class="tab-btn" data-source="merdeka">Merdeka</button>
+          <button class="tab-btn" data-source="kompas">Kompas</button>
+          <button class="tab-btn" data-source="detik">Detik</button>
+          <button class="tab-btn" data-source="cnn">CNN</button>
+        </div>
+
+        <div id="news-grid" class="news-grid">
+          <div class="news-skeleton" id="news-skeleton">
+            <div class="news-card-skeleton glass"><div class="skeleton-img"></div><div class="skeleton-line w-full mt-3"></div><div class="skeleton-line w-4/5"></div><div class="skeleton-line w-3/5"></div></div>
+            <div class="news-card-skeleton glass"><div class="skeleton-img"></div><div class="skeleton-line w-full mt-3"></div><div class="skeleton-line w-4/5"></div><div class="skeleton-line w-3/5"></div></div>
+            <div class="news-card-skeleton glass"><div class="skeleton-img"></div><div class="skeleton-line w-full mt-3"></div><div class="skeleton-line w-4/5"></div><div class="skeleton-line w-3/5"></div></div>
+            <div class="news-card-skeleton glass"><div class="skeleton-img"></div><div class="skeleton-line w-full mt-3"></div><div class="skeleton-line w-4/5"></div><div class="skeleton-line w-3/5"></div></div>
+            <div class="news-card-skeleton glass"><div class="skeleton-img"></div><div class="skeleton-line w-full mt-3"></div><div class="skeleton-line w-4/5"></div><div class="skeleton-line w-3/5"></div></div>
+            <div class="news-card-skeleton glass"><div class="skeleton-img"></div><div class="skeleton-line w-full mt-3"></div><div class="skeleton-line w-4/5"></div><div class="skeleton-line w-3/5"></div></div>
+          </div>
+          <div id="news-content" class="news-cards-grid"></div>
+          <div id="news-empty" class="empty-state hidden"><i class="fas fa-newspaper"></i><p>Tidak ada berita ditemukan</p></div>
+          <div id="news-error" class="error-state hidden"><i class="fas fa-exclamation-triangle"></i><p>Gagal memuat berita</p><button onclick="loadNews(currentNewsSource)" class="retry-btn">Coba Lagi</button></div>
+        </div>
+      </section>
+
+      <!-- ========== PAGE: GAMBAR ========== -->
+      <section id="page-gambar" class="page">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fas fa-images"></i> Galeri Anime</h2>
+        </div>
+
+        <div class="tab-bar" id="image-tabs">
+          <button class="tab-btn active" data-source="bluearchive">Blue Archive</button>
+          <button class="tab-btn" data-source="jiso">Jiso</button>
+          <button class="tab-btn" data-source="lisa">Lisa</button>
+          <button class="tab-btn" data-source="loli">Loli Art</button>
+        </div>
+
+        <div id="image-grid-wrap">
+          <div id="image-skeleton" class="image-masonry">
+            <div class="img-skeleton glass"></div>
+            <div class="img-skeleton glass"></div>
+            <div class="img-skeleton glass"></div>
+            <div class="img-skeleton glass"></div>
+            <div class="img-skeleton glass"></div>
+            <div class="img-skeleton glass"></div>
+            <div class="img-skeleton glass"></div>
+            <div class="img-skeleton glass"></div>
+          </div>
+          <div id="image-masonry" class="image-masonry hidden"></div>
+          <div id="image-empty" class="empty-state hidden"><i class="fas fa-images"></i><p>Tidak ada gambar</p></div>
+          <div id="image-error" class="error-state hidden"><i class="fas fa-exclamation-triangle"></i><p>Gagal memuat gambar</p><button onclick="loadImages(currentImageSource)" class="retry-btn">Coba Lagi</button></div>
+        </div>
+
+        <!-- Image Modal -->
+        <div id="image-modal" class="img-modal hidden">
+          <div class="img-modal-backdrop" onclick="closeImageModal()"></div>
+          <div class="img-modal-content glass-heavy">
+            <button class="img-modal-close" onclick="closeImageModal()"><i class="fas fa-times"></i></button>
+            <img id="img-modal-src" src="" alt="Preview" class="img-modal-img" />
+            <div class="img-modal-actions">
+              <a id="img-download-link" href="#" download class="download-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-download"></i> Download
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== PAGE: GAME ========== -->
+      <section id="page-game" class="page">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fas fa-gamepad"></i> Game Zone</h2>
+        </div>
+
+        <div class="tab-bar" id="game-tabs">
+          <button class="tab-btn active" data-source="heroes">Hero MLBB</button>
+          <button class="tab-btn" data-source="counter">Counter Hero</button>
+          <button class="tab-btn" data-source="build">Build ML</button>
+          <button class="tab-btn" data-source="roblox">Roblox</button>
+        </div>
+
+        <!-- Heroes -->
+        <div id="game-heroes" class="game-sub">
+          <div class="search-bar-wrap mb-4">
+            <input type="text" id="hero-search" placeholder="Cari hero..." class="search-input" />
+            <i class="fas fa-search search-icon"></i>
+          </div>
+          <div id="heroes-skeleton" class="heroes-grid">
+            <div class="hero-skeleton glass"></div>
+            <div class="hero-skeleton glass"></div>
+            <div class="hero-skeleton glass"></div>
+            <div class="hero-skeleton glass"></div>
+            <div class="hero-skeleton glass"></div>
+            <div class="hero-skeleton glass"></div>
+            <div class="hero-skeleton glass"></div>
+            <div class="hero-skeleton glass"></div>
+            <div class="hero-skeleton glass"></div>
+            <div class="hero-skeleton glass"></div>
+            <div class="hero-skeleton glass"></div>
+            <div class="hero-skeleton glass"></div>
+          </div>
+          <div id="heroes-grid" class="heroes-grid hidden"></div>
+          <div id="heroes-empty" class="empty-state hidden"><i class="fas fa-user-ninja"></i><p>Hero tidak ditemukan</p></div>
+          <div id="heroes-error" class="error-state hidden"><i class="fas fa-exclamation-triangle"></i><p>Gagal memuat hero</p><button onclick="loadHeroes()" class="retry-btn">Coba Lagi</button></div>
+        </div>
+
+        <!-- Counter -->
+        <div id="game-counter" class="game-sub hidden">
+          <div class="counter-search glass">
+            <div class="counter-input-wrap">
+              <input type="text" id="counter-input" placeholder="Nama hero (e.g. Fanny)" class="search-input" />
+              <button class="counter-btn" onclick="loadCounter()"><i class="fas fa-search"></i> Cari Counter</button>
+            </div>
+          </div>
+          <div id="counter-result"></div>
+        </div>
+
+        <!-- Build -->
+        <div id="game-build" class="game-sub hidden">
+          <div id="build-skeleton" class="build-skeleton-wrap">
+            <div class="skeleton-line w-1/3 mb-4" style="height:2rem"></div>
+            <div class="glass build-card-skeleton mb-3"></div>
+            <div class="glass build-card-skeleton mb-3"></div>
+            <div class="glass build-card-skeleton"></div>
+          </div>
+          <div id="build-content"></div>
+          <div id="build-error" class="error-state hidden"><i class="fas fa-exclamation-triangle"></i><p>Gagal memuat build</p><button onclick="loadBuild()" class="retry-btn">Coba Lagi</button></div>
+        </div>
+
+        <!-- Roblox -->
+        <div id="game-roblox" class="game-sub hidden">
+          <div id="roblox-skeleton" class="roblox-grid">
+            <div class="roblox-skeleton glass"></div>
+            <div class="roblox-skeleton glass"></div>
+            <div class="roblox-skeleton glass"></div>
+            <div class="roblox-skeleton glass"></div>
+            <div class="roblox-skeleton glass"></div>
+            <div class="roblox-skeleton glass"></div>
+          </div>
+          <div id="roblox-grid" class="roblox-grid hidden"></div>
+          <div id="roblox-error" class="error-state hidden"><i class="fas fa-exclamation-triangle"></i><p>Gagal memuat Roblox</p><button onclick="loadRoblox()" class="retry-btn">Coba Lagi</button></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav glass-heavy">
+      <button class="nav-btn active" data-page="berita" onclick="switchPage('berita')">
+        <div class="nav-icon-wrap">
+          <i class="fas fa-newspaper"></i>
+          <span class="nav-dot"></span>
+        </div>
+        <span class="nav-label">Berita</span>
+      </button>
+      <button class="nav-btn" data-page="gambar" onclick="switchPage('gambar')">
+        <div class="nav-icon-wrap">
+          <i class="fas fa-images"></i>
+          <span class="nav-dot"></span>
+        </div>
+        <span class="nav-label">Gambar</span>
+      </button>
+      <button class="nav-btn" data-page="game" onclick="switchPage('game')">
+        <div class="nav-icon-wrap">
+          <i class="fas fa-gamepad"></i>
+          <span class="nav-dot"></span>
+        </div>
+        <span class="nav-label">Game</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
